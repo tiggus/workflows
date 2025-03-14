@@ -38,7 +38,7 @@ jobs:
   
   deploy: 
     needs: [build, test]
-    env: prd
+    environment: prd
 
     runs-on: ubuntu-latest
 
