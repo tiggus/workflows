@@ -7,6 +7,11 @@ on:
         description: "node version"
         required: true
         type: string
+      envname:
+        description: "target env"
+        required: true
+        type: string
+        default: "npd"
 
 jobs: 
   build:
@@ -38,7 +43,7 @@ jobs:
   
   deploy: 
     needs: [build, test]
-    environment: prd
+    environment: ${{ inputs.envname }}
 
     runs-on: ubuntu-latest
 
