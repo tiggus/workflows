@@ -1,0 +1,29 @@
+name: terraform
+
+on:
+  workflow_call:
+    # inputs:
+    #   artifact-name:
+    #     description: "name of the artifact"
+    #     required: true
+    #     type: string
+    #   artifact-path:
+    #     description: "path to artifact folder"
+    #     required: true
+    #     type: string
+
+jobs: 
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: terraform init
+        run: terraform init
+      - name: terraform format
+        run: terraform fmt
+      - name: terraform validate
+        run: terraform validate
+      - name: terraform plan
+        run: terraform plan
