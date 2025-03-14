@@ -1,20 +1,40 @@
-name: reusable workflow
+name: build-test-deploy
 
 on:
   workflow_call:
     inputs:
-      config-path:
+      node-version:
+        description: "node version"
         required: true
         type: string
-    secrets:
-      token:
-        required: true
 
-jobs:
-  triage:
+jobs: 
+  build:
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/labeler@v4
-      with:
-        repo-token: ${{ secrets.token }}
-        configuration-path: ${{ inputs.config-path }}
+
+    steps: 
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - run: npm install
+      - run: npm run build
+
+  test: 
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ inputs.node-version }}
+          
+      - run: npm install
+      - run: npm run test
