@@ -35,3 +35,13 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
       - run: echo "test"
+  
+  deploy: 
+    needs: [build, test]
+
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - run: echo "deploy"
