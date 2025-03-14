@@ -17,9 +17,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: mkdir -p ./${{ path }}
-      - run: echo artifact > ./${{ path }}/${{ name }}
+      - run: mkdir -p ./${{ inputs.artifact-path }}
+      - run: echo artifact > ./${{ inputs.artifact-path }}/${{ inputs.artifact-name }}
       - uses: actions/upload-artifact@v4
         with:
-          path: ${{ inputs.artifact-path }}
+        with:
           name: ${{ inputs.artifact-name }}
+          path: ${{ inputs.artifact-path }}
