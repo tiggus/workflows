@@ -19,6 +19,11 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+            terraform_version: "^1.3.7"
+            terraform_wrapper: false
       - name: terraform init
         run: terraform init
       - name: terraform format
