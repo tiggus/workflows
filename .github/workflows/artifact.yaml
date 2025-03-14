@@ -21,6 +21,5 @@ jobs:
       - run: echo artifact > ./${{ inputs.artifact-path }}/${{ inputs.artifact-name }}
       - uses: actions/upload-artifact@v4
         with:
-        with:
           name: ${{ inputs.artifact-name }}
           path: ${{ inputs.artifact-path }}
