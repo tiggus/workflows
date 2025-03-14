@@ -30,9 +30,9 @@ jobs:
         run: terraform fmt
       - name: terraform validate
         run: terraform validate
-      - name: terraform plan -out=plan.tfplan
+      - name: terraform plan -out=.
         run: terraform plan
       - uses: actions/upload-artifact@v4
         with:
           name: "tfplan"
-          path: "plan.tfplan"
+          path: "./plan.tfplan"
