@@ -1,0 +1,25 @@
+name: upload-artifact
+
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        description: "name of the artifact"
+        required: true
+        type: string
+      artifact-path:
+        description: "path to artifact folder"
+        required: true
+        type: string
+
+jobs: 
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: mkdir -p ./$path
+      - run: echo artifact > ./$path/$name
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: ${{ inputs.artifact-path }}
